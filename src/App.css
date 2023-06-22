@@ -1,0 +1,10 @@
+.home-color {
+    color: #001066 !important;
+}
+.btn:hover {
+    background-color: rgba(0, 16, 102, 0.7) !important;
+}
+
+.decoration {
+    text-decoration: none !important;
+}
