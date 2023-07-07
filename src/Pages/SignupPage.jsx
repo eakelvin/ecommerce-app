@@ -3,19 +3,10 @@ import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import { Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import { useFormik } from 'formik';
+import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
+import * as Yup from 'yup'
 
 function Signup() {
-    const formik = useFormik({
-        initialValues: {
-            email: "",
-            password: "",
-            confirmPassword: ""
-        }, 
-        onSubmit:(values) => {
-            console.log("onSubmit", values);
-        }
-    })
 
   return (
     <>
@@ -49,52 +40,69 @@ function Signup() {
             </div>
             
             <div className='mt-5'>
-            <Form onSubmit={formik.handleSubmit}>
+            <Formik 
+                initialValues={{
+                    email:"",
+                    password:"",
+                    confirmPassword:""
+                }}
+                validationSchema={
+                    Yup.object({
+                        // email: Yup.string().required("Required")
+                        password: Yup.string().required("Password is Required"),
+                        confirmPassword: Yup.string()
+                            .required("ConfirmPassword is Required")
+                            .oneOf([Yup.ref("password"), null], "Passwords must match!")
+                    })
+                }
+                onSubmit={(values) => {
+                    console.log(values);
+                }}
+            >    
+            <FormikForm>
                 <Col sm={3} className='mx-auto'>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3">
                     <Form.Label>Email Address</Form.Label>
-                    <Form.Control required className='p-2' style={{backgroundColor: "#F5F5F5"}} 
+                    <Field required className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
                                 type="email"
                                 name='email'
-                                value={formik.values.email}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur} />
+                                // onBlur={formik.handleBlur} 
+                            />
                     </Form.Group>
                 </Col>
 
                 <Col sm={3} className='mx-auto'>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control required className='p-2' style={{backgroundColor: "#F5F5F5"}} 
+                    <Field required className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
                                 type="password"
                                 name='password'
-                                value={formik.values.password}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}/>
+                                />
+                    <ErrorMessage component="label" className='form-label text-danger' name='password' />
                 </Form.Group>
                 </Col>
 
                 <Col sm={3} className='mx-auto'>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3">
                     <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control required className='p-2' style={{backgroundColor: "#F5F5F5"}} 
+                    <Field required className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
                                 type="password"
                                 name='confirmPassword'
-                                value={formik.values.confirmPassword}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
+                               
                                 />
+                    <ErrorMessage name='confirmPassword' component='label' className='form-label text-danger font-bold' />
                 </Form.Group>
                 </Col>
 
                 <Col sm={3} className='mx-auto mt-4'>
                 <div className='d-grid gap-2'>
                 <Button style={{backgroundColor: "#001066"}} type="submit">
-                    Sign In
+                    Sign Up
                 </Button>
                 </div>
                 </Col>
-            </Form>
+            </FormikForm>
+            </Formik>
             </div>
 
         </div>
