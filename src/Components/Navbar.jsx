@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {MdLegendToggle} from "react-icons/md";
 import {BsCartCheck, BsFillCartXFill} from "react-icons/bs"
 import Button from 'react-bootstrap/Button';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
  function Navbar() {
+  const navigate = useNavigate()
+  const [login, setLogin] = useState(false)
+
+  // const handleLogin = () => {
+  //   setLogin(true)
+  //   console.log(login);
+  //   navigate('/login')
+  // }
+
+  const handleLogout = () => {
+    setLogin(false)
+    localStorage.clear()
+    window.location.reload()
+    navigate('/login')
+    console.log(login);
+  }
 
     return (
 
@@ -33,13 +49,23 @@ import { Link } from "react-router-dom";
                   </li>
               </ul>
 
-              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                <Link to="/login">
-                  <Button className="btn" style={{backgroundColor: "#001066"}} size="lg" active>
-                    Login
+             { login ? (
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <Button onClick={handleLogout} className="btn btn-secondary" size="lg">
+                    Logout
                   </Button>
-                </Link>
-              </div>
+                </div>
+
+                ):(
+
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <Link to="/login">
+                    <Button className="btn" style={{backgroundColor: "#001066"}} size="lg" active>
+                      Login
+                    </Button>
+                  </Link>
+                </div>
+              )}
 
               </div>
           </div>

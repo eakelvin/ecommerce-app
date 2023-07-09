@@ -1,32 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import { Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import { useFormik } from 'formik';
 import * as Yup from 'yup'
-import { Formik, Field, Form as FormikForm } from 'formik';
+import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
 
 
 function Login() {
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: ""
-    },
-
-    validationSchema: Yup.object({
-      email: Yup.string().email("Invalid Email Address").required("REQUIRED"),
-      password: Yup.string().required("REQUIRED!")
-    }),
-
-    onSubmit: (values) => {
-      console.log("onSubmit", values);
-    }
-
-  })
-
-   
+  const navigate = useNavigate()
 
   return (
     <>
@@ -63,32 +45,50 @@ function Login() {
         </div>
         
         <div className='mt-5'>
-        <Form onSubmit={formik.handleSubmit}>
+        <Formik 
+          initialValues = {{
+            email: "",
+            password: ""
+          }}
+          validationSchema = {
+            Yup.object({
+              email: Yup.string().email("Invalid Email Address"),
+              password: Yup.string()
+                .required("PASSWORD IS REQUIRED!")
+                .min(8, 'Password must be at least 8 characters')
+            })
+          }
+          onSubmit = {(values, {setErrors, setSubmitting}) => {
+            const storedInfo = JSON.parse(localStorage.getItem("values"))
+            if(values.email === storedInfo.email && values.password === storedInfo.password) {
+              navigate('/')
+            } else {
+              setErrors({ password: 'Invalid Email or Password. Please try again'})
+            }
+            
+            // console.log(values);
+          }}
+        >
+        <FormikForm>
           <Col sm={3} className='mx-auto'>
             <Form.Group className="mb-3">
               <Form.Label>Email Address</Form.Label>
-              <Form.Control className='p-2' style={{backgroundColor: "#F5F5F5"}} 
+              <Field required className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
                             type="email"
-                            name='email'
-                            value={formik.values.email}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur} 
+                            name='email' 
                             />
-                  <div>{formik.errors.email && formik.touched.email && formik.errors.email}</div>
+                  <ErrorMessage component='label' className='form-label text-danger fw-bold' name='email' />
             </Form.Group>
           </Col>
 
           <Col sm={3} className='mx-auto'>
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
-            <Form.Control className='p-2' style={{backgroundColor: "#F5F5F5"}} 
+            <Field className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
                           type="password"
                           name='password'
-                          value={formik.values.password}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
                           />
-                  <div>{formik.errors.password && formik.touched.password && formik.errors.password}</div>
+                  <ErrorMessage component='label' className='form-label text-danger' name='password' />
           </Form.Group>
           </Col>
 
@@ -100,14 +100,12 @@ function Login() {
           </div>
           </Col>
 
-        </Form>
+        </FormikForm>
+        </Formik>
         </div>
 
         </div>
 
-      
-      
-      
     </>
   )
 }

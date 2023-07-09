@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import { Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
@@ -7,6 +7,7 @@ import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
 import * as Yup from 'yup'
 
 function Signup() {
+    const navigate = useNavigate()
 
   return (
     <>
@@ -48,14 +49,21 @@ function Signup() {
                 }}
                 validationSchema={
                     Yup.object({
-                        // email: Yup.string().required("Required")
-                        password: Yup.string().required("Password is Required"),
+                        email: Yup.string()
+                            // .required("Enter your email")
+                            .email("Invalid Email Address"),
+                        password: Yup.string()
+                            .required("Password is Required")
+                            .min(8, 'Password must be at least 8 characters'),
                         confirmPassword: Yup.string()
-                            .required("ConfirmPassword is Required")
+                            .required("Confirm Password is Required")
                             .oneOf([Yup.ref("password"), null], "Passwords must match!")
                     })
                 }
                 onSubmit={(values) => {
+                    delete values.confirmPassword
+                    localStorage.setItem("values", JSON.stringify(values))
+                    navigate('/login')
                     console.log(values);
                 }}
             >    
@@ -63,11 +71,12 @@ function Signup() {
                 <Col sm={3} className='mx-auto'>
                     <Form.Group className="mb-3">
                     <Form.Label>Email Address</Form.Label>
-                    <Field required className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
+                    <Field className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
                                 type="email"
                                 name='email'
                                 // onBlur={formik.handleBlur} 
                             />
+                        <ErrorMessage component='label' className='form-label text-danger' name='email' />
                     </Form.Group>
                 </Col>
 
