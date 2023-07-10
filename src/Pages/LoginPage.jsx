@@ -18,9 +18,6 @@ function Login() {
         <Link style={{textDecoration: 'none'}} to="/">
           <span className="ms-3">AzubiShop</span>
         </Link>
-          {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-          </button> */}
 
           <div className='d-flex justify-content-end'>
             <div className='mx-3 mt-2'>
@@ -58,9 +55,10 @@ function Login() {
                 .min(8, 'Password must be at least 8 characters')
             })
           }
-          onSubmit = {(values, {setErrors, setSubmitting}) => {
+          onSubmit = {(values, {setErrors}) => {
             const storedInfo = JSON.parse(localStorage.getItem("values"))
             if(values.email === storedInfo.email && values.password === storedInfo.password) {
+              // localStorage.setItem('values', true)
               navigate('/')
             } else {
               setErrors({ password: 'Invalid Email or Password. Please try again'})

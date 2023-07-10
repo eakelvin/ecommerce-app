@@ -6,20 +6,25 @@ import { Link, useNavigate } from "react-router-dom";
 
  function Navbar() {
   const navigate = useNavigate()
-  const [login, setLogin] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  // const handleLogin = () => {
-  //   setLogin(true)
-  //   console.log(login);
-  //   navigate('/login')
-  // }
+  useEffect(() => {
+    const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true'
+    setIsLoggedIn(userLoggedIn)
+  }, [])
+
+  const handleLogin = () => {
+    setIsLoggedIn(true)
+    localStorage.setItem('isLoggedIn', 'true')
+    navigate('/login')
+  }
 
   const handleLogout = () => {
-    setLogin(false)
-    localStorage.clear()
+    setIsLoggedIn(false)
+    localStorage.setItem('isLoggedIn', 'false')
+    // localStorage.clear()
     window.location.reload()
-    navigate('/login')
-    console.log(login);
+    navigate('/')
   }
 
     return (
@@ -49,7 +54,7 @@ import { Link, useNavigate } from "react-router-dom";
                   </li>
               </ul>
 
-             { login ? (
+             {isLoggedIn ? (
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                   <Button onClick={handleLogout} className="btn btn-secondary" size="lg">
                     Logout
@@ -59,11 +64,11 @@ import { Link, useNavigate } from "react-router-dom";
                 ):(
 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <Link to="/login">
-                    <Button className="btn" style={{backgroundColor: "#001066"}} size="lg" active>
+                  {/* <Link to="/login"> */}
+                    <Button onClick={handleLogin} className="btn" style={{backgroundColor: "#001066"}} size="lg" active>
                       Login
                     </Button>
-                  </Link>
+                  {/* </Link> */}
                 </div>
               )}
 
