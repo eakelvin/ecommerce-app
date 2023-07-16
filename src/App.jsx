@@ -7,8 +7,11 @@ import DetailsPage from './Pages/DetailsPage'
 import CartPage from './Pages/CartPage'
 import Login from './Pages/LoginPage'
 import Signup from './Pages/SignupPage'
+import { useSelector } from 'react-redux'
 
 function App() {
+  const cartItem = useSelector((state) => state.cart.cartItems)
+  console.log(cartItem);
 
   return (
     <>

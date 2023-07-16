@@ -4,10 +4,22 @@ import { useParams } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
 import { Container, Row, Col } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
+import { useDispatch, useSelector } from 'react-redux'
+import { addToCart } from '../CarttSlice'
 
 function DetailsPage() {
     const {id} = useParams()
     const products = data.find(prod => prod.id === id)
+    const dispatch = useDispatch()
+   
+
+    const handleCart = () => {
+      dispatch(addToCart({
+        name: products.name,
+        id: products.id,
+        price: products.price
+      }))
+    }
 
   return (
     <div>
@@ -25,7 +37,10 @@ function DetailsPage() {
                         <p>{products.description}</p>
                         <h5 className='fw-bold'>{products.price}</h5>
                         <div className="d-grid">
-                            <Button style={{backgroundColor : "#001066"}} size="lg">
+                            <Button 
+                              onClick={handleCart} 
+                              style={{backgroundColor : "#001066"}} 
+                              size="lg">
                                 Add to Cart
                             </Button>
                         </div>

@@ -5,6 +5,7 @@ import Products from '../Components/Products'
 import data from '../data'
 
 function Home() {
+  
   const [products, setProducts] = useState(data)
 
   const handleSearch = (value) => {
