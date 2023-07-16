@@ -14,7 +14,7 @@ export default function Product(props) {
                     <Link to={`/productdetails/${props.id}`}>
                         <Button className="btn" style={{backgroundColor: "#001066"}} size="lg">Place Order</Button>
                     </Link>
-                    <span className="ms-5">{props.price}</span>
+                    <span className="ms-5">${props.price}</span>
                     </div>
                 </div>
             </div>

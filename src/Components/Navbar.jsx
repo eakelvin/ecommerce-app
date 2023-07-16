@@ -56,12 +56,14 @@ import { useSelector } from "react-redux";
                     </Link>
                   </li> */}
 
-                  <li class="btn position-relative">
+                  <li className="btn position-relative">
+                    <Link style={{textDecoration: 'none'}} to="/cart">
                     Cart
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     {quantity}
-                    <span class="visually-hidden">unread messages</span>
+                    <span className="visually-hidden">unread messages</span>
                   </span>
+                  </Link>
                 </li>
               </ul>
 

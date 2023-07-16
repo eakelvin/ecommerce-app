@@ -17,6 +17,7 @@ const cartSlice = createSlice({
             if (existingItem) {
                 existingItem.quantity++
                 existingItem.totalPrice += newItem.price
+                console.log('Item already exists in Cart');
             } else {
                 state.cartItems.push({
                     id: newItem.id,
@@ -27,7 +28,6 @@ const cartSlice = createSlice({
                 })
                 state.cartTotalQuantity++
             }
-            
         },
         removeFromCart() {
 

@@ -1,9 +1,11 @@
 import React from 'react'
 import Navbar from '../Components/Navbar'
 import Button from 'react-bootstrap/Button';
+import { useSelector } from 'react-redux';
 
 
 function CartPage() {
+    const itemsList = useSelector((state) => state.cart.cartItems)
 
   return (
     <>
@@ -12,7 +14,7 @@ function CartPage() {
         <div style={{backgroundColor: "#F5F5F5"}} className='w-75 mt-5 mx-auto'>
             <div className='p-5'>
                 <h1>Cart</h1>
-           
+            
                 <div className='p-5'>
                 <table className="table table-secondary">
                     <thead>
@@ -25,16 +27,17 @@ function CartPage() {
                         <th scope="col"></th>
                         </tr>
                     </thead>
-                    <tbody className='table-group-divider'>
+                {itemsList.map((item) => (
+                    <tbody key={item.id} className='table-group-divider'>
                         <tr>
                         <th scope="row"></th>
                         <td>
                             <img src="" alt="" />
-                            <p></p>
+                            <p>{item.name}</p>
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{item.price}</td>
+                        <td>{item.quantity}</td>
+                        <td>{item.totalPrice}</td>
                         <td>
                             <Button variant="danger" size="sm">
                                 Delete
@@ -42,9 +45,10 @@ function CartPage() {
                         </td>
                         </tr>
                     </tbody>
+                ))}
                 </table>
                 </div>
-
+            
             </div>
         </div>
 
