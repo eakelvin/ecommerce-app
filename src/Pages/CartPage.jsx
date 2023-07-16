@@ -28,15 +28,21 @@ function CartPage() {
                         </tr>
                     </thead>
                 {itemsList.map((item) => (
-                    <tbody key={item.id} className='table-group-divider'>
+                    <tbody key={item.id} className='table-group-divider '>
                         <tr>
                         <th scope="row"></th>
                         <td>
-                            <img src="" alt="" />
+                            {/* <img src={item.imgUrl} alt="" /> */}
                             <p>{item.name}</p>
                         </td>
                         <td>${item.price}</td>
-                        <td>{item.quantity}</td>
+                        <td>
+                            <div className="btn-group me-2" role="group" aria-label="Second group">
+                                <button type="button" className="btn">-</button>
+                                <button className="btn">{item.quantity}</button>
+                                <button type="button" className="btn ">+</button>
+                            </div>
+                        </td>
                         <td>${item.totalPrice}</td>
                         <td>
                             <Button variant="danger" size="sm">
