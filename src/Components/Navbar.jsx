@@ -33,9 +33,13 @@ import { useSelector } from "react-redux";
 
       <nav className="navbar navbar-expand-lg border-bottom border-5">
           <div className="container-fluid p-3">
-            <Link style={{textDecoration: 'none'}} to="/">
-              <span className="ms-3">AzubiShop</span>
-            </Link>
+              <Link style={{textDecoration: 'none'}} to="/">
+                <span className="">
+                  <img src="/Paperbag.png" alt="Logo" className="d-inline-block" />
+                    AzubiShop
+                </span>
+              </Link>
+
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
               </button>

@@ -4,7 +4,6 @@ const initialState = {
     cartItems: [],
     cartTotalQuantity: 0,
     // cartTotalAmount: 0
-    showCart: false
 }
 
 const cartSlice = createSlice({
@@ -32,9 +31,6 @@ const cartSlice = createSlice({
         removeFromCart() {
 
         },
-        setShowCart(state) {
-            state.showCart = true
-        }
 
 
     }

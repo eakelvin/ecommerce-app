@@ -35,9 +35,9 @@ function CartPage() {
                             <img src="" alt="" />
                             <p>{item.name}</p>
                         </td>
-                        <td>{item.price}</td>
+                        <td>${item.price}</td>
                         <td>{item.quantity}</td>
-                        <td>{item.totalPrice}</td>
+                        <td>${item.totalPrice}</td>
                         <td>
                             <Button variant="danger" size="sm">
                                 Delete
