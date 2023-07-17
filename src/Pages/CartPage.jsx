@@ -1,11 +1,27 @@
 import React from 'react'
 import Navbar from '../Components/Navbar'
 import Button from 'react-bootstrap/Button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, removeFromCart } from '../CarttSlice';
 
 
 function CartPage() {
     const itemsList = useSelector((state) => state.cart.cartItems)
+    const dispatch = useDispatch()
+    let total = 0
+
+    itemsList.forEach(item => {
+        total += item.totalPrice
+    })
+
+    const addItems = (id) => {
+        const item = itemsList.find(item => item.id === id)
+        dispatch(addToCart(item))
+    }
+
+    const minusItems = (id) => {
+        dispatch(removeFromCart(id))
+    }
 
   return (
     <>
@@ -38,9 +54,9 @@ function CartPage() {
                         <td>${item.price}</td>
                         <td>
                             <div className="btn-group me-2" role="group" aria-label="Second group">
-                                <button type="button" className="btn">-</button>
+                                <button onClick={() => minusItems(item.id)} className="btn">-</button>
                                 <button className="btn">{item.quantity}</button>
-                                <button type="button" className="btn ">+</button>
+                                <button onClick={() => addItems(item.id)} type="button" className="btn ">+</button>
                             </div>
                         </td>
                         <td>${item.totalPrice}</td>
@@ -60,7 +76,7 @@ function CartPage() {
 
         <div className='p-5 me-auto col-md-3 offset-md-7 '>
             <div className='d-flex justify-content-end'>
-                <p>Total Price :</p>
+                <p>Total Price : ${total}</p>
             </div>
             
             <div className='d-flex justify-content-end'>

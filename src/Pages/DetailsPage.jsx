@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../CarttSlice'
 
+
 function DetailsPage() {
     const {id} = useParams()
     const products = data.find(prod => prod.id === id)
@@ -55,14 +56,3 @@ function DetailsPage() {
 }
 
 export default DetailsPage
-
-
-
-{/* <section class="p-5">
-<div class="container piz">
-    <div class="row">
-    
-
-    </div>
-  </div>
-</section> */}
