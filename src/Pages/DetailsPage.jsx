@@ -18,7 +18,8 @@ function DetailsPage() {
       dispatch(addToCart({
         name: products.name,
         id: products.id,
-        price: products.price
+        price: products.price,
+        imgUrl: products.imgUrl
       }))
     }
 
@@ -36,7 +37,7 @@ function DetailsPage() {
                     <div className='p-5'>
                         <h3 className='fw-bold'>{products.name}</h3>
                         <p>{products.description}</p>
-                        <h5 className='fw-bold'>{products.price}</h5>
+                        <h5 className='fw-bold'>${products.price}</h5>
                         <div className="d-grid">
                             <Button 
                               onClick={handleCart} 

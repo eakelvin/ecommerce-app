@@ -44,12 +44,12 @@ function CartPage() {
                         </tr>
                     </thead>
                 {itemsList.map((item) => (
-                    <tbody key={item.id} className='table-group-divider '>
+                    <tbody key={item.id} className='table-group-divider'>
                         <tr>
                         <th scope="row"></th>
-                        <td>
-                            {/* <img src={item.imgUrl} alt="" /> */}
-                            <p>{item.name}</p>
+                        <td className='d-flex'>
+                            <img className='cart-image' src={item.imgUrl} />
+                            <p className='px-3'>{item.name}</p>
                         </td>
                         <td>${item.price}</td>
                         <td>
