@@ -29,16 +29,16 @@ function DetailsPage() {
 
         <Container className='p-5 mt-5'>
             <Row>
-                <Col xs={3}>
+                <div className='col-md-6 col-lg-4'>
                   <img className='rounded-2' src={products.imgUrl} alt="" />  
-                </Col>
+                </div>
 
-                <Col>
+                <div className='col-md-6 col-lg-7'>
                     <div className='p-5'>
                         <h3 className='fw-bold'>{products.name}</h3>
                         <p>{products.description}</p>
                         <h5 className='fw-bold'>${products.price}</h5>
-                        <div className="d-grid">
+                        <div className="d-grid pt-2">
                             <Button 
                               onClick={handleCart} 
                               style={{backgroundColor : "#001066"}} 
@@ -47,7 +47,7 @@ function DetailsPage() {
                             </Button>
                         </div>
                     </div>
-                </Col>
+                </div>
             </Row>
 
         </Container>

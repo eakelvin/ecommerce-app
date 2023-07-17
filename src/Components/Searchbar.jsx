@@ -16,7 +16,7 @@ export default function SearchBar(props) {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <div className="col-7 mx-auto mt-5">
+            <div className="col-8 mx-auto mt-5">
                 <div className="input-group">
                     <div style={{backgroundColor: "#F5F5F5"}} className="input-group-text">
                         <button type="submit" style={{backgroundColor: "#F5F5F5"}}>
