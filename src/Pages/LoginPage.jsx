@@ -16,7 +16,11 @@ function Login() {
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid p-3">
         <Link style={{textDecoration: 'none'}} to="/">
-          <span className="ms-3">AzubiShop</span>
+          {/* <span className="ms-3">AzubiShop</span> */}
+          <span className="">
+            <img src="/Paperbag.png" alt="Logo" className="d-inline-block" />
+              AzubiShop
+          </span>
         </Link>
 
           <div className='d-flex justify-content-end'>

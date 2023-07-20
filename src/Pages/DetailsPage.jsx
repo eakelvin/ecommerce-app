@@ -27,13 +27,13 @@ function DetailsPage() {
     <div>
         <Navbar />
 
-        <Container className='p-5 mt-5'>
+        <Container className='p-5'>
             <Row>
-                <div className='col-md-6 col-lg-4'>
+                <div className='col-md-6 col-lg-4 p-5'>
                   <img className='rounded-2' src={products.imgUrl} alt="" />  
                 </div>
 
-                <div className='col-md-6 col-lg-7'>
+                <div className='col-sm-12 col-md-6 col-lg-7'>
                     <div className='p-5'>
                         <h3 className='fw-bold'>{products.name}</h3>
                         <p>{products.description}</p>
