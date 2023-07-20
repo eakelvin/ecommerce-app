@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+
  function Navbar() {
   const navigate = useNavigate()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -30,48 +31,35 @@ import { useSelector } from "react-redux";
   }
 
     return (
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid justify-content-between">
 
-      <nav className="navbar navbar-expand-lg border-bottom border-5">
-          <div className="container-fluid p-3">
+            <div class="d-flex">
               <Link style={{textDecoration: 'none'}} to="/">
                 <span className="">
                   <img src="/Paperbag.png" alt="Logo" className="d-inline-block" />
                     AzubiShop
                 </span>
               </Link>
-
-              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-              </button>
-
-              <div className="collapse navbar-collapse" id="navbarText">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
-                  <li className="nav-item">
-                    <Link style={{textDecoration: 'none'}} to="/">
-                      <span className="nav-link active home-color" aria-current="page">Home</span>
-                    </Link>
-                  </li>
-                  
-                  {/* <li className="nav-item">
-                    <Link style={{textDecoration: 'none'}} to="/cart">
-                      <span className="nav-link">
-                        Cart:{quantity}
-                      </span>
-                    </Link>
-                  </li> */}
-
-                  <li className="btn position-relative">
-                    <Link style={{textDecoration: 'none'}} to="/cart">
+            </div>
+          
+            <ul class="navbar-nav flex-row">
+              <li class="nav-item me-3 me-lg-1 active">
+              <span className="position-relative">
+                <Link style={{textDecoration: 'none'}} to="/cart">
                     Cart
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     {quantity}
                     <span className="visually-hidden">unread messages</span>
                   </span>
-                  </Link>
-                </li>
-              </ul>
+                </Link>
+                </span>
+              </li>
+            </ul>
 
-             {isLoggedIn ? (
+            <ul class="navbar-nav flex-row">
+              <li class="nav-item me-3 me-lg-1">
+              {isLoggedIn ? (
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                   <Button onClick={handleLogout} className="btn btn-secondary" size="lg">
                     Logout
@@ -88,11 +76,11 @@ import { useSelector } from "react-redux";
                   {/* </Link> */}
                 </div>
               )}
-
-              </div>
+              </li>
+            </ul>
+            
           </div>
-      </nav>
- 
+        </nav>
     )
 }
 
