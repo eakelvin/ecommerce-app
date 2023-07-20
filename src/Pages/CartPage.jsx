@@ -33,51 +33,92 @@ function CartPage() {
     <>
         <Navbar />
 
-        <div style={{backgroundColor: "#F5F5F5"}} className='w-75 mt-5 mx-auto'>
-            <div className='p-5'>
-                <h1>Cart</h1>
-            
-                <div className='p-5'>
-                <table className="table table-secondary">
-                    <thead>
-                        <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quanity</th>
-                        <th scope="col">Total</th>
-                        <th scope="col"></th>
-                        </tr>
-                    </thead>
+        <div className='p-4'>            
+        <div className='mt-5 p-5' style={{backgroundColor: "#F5F5F5"}}>
+            <h1 className=''>Cart</h1>
+            <div className='d-none d-sm-block'>
+                <div className='d-flex justify-content-around border-5 border-bottom'>
+                    <div className='col'>Product</div>
+                    <div className='col'>Price</div>
+                    <div className='col'>Quantity</div>
+                    <div className='col'>Total</div>
+                    <div className='col invisible'>5</div>
+                </div>
                 {itemsList.map((item) => (
-                    <tbody key={item.id} className='table-group-divider'>
-                        <tr>
-                        <th scope="row"></th>
-                        <td className='d-flex'>
-                            <img className='cart-image' src={item.imgUrl} />
-                            <p className='px-3'>{item.name}</p>
-                        </td>
-                        <td>${item.price}</td>
-                        <td>
-                            <div className="btn-group me-2" role="group" aria-label="Second group">
+                <div key={item.id} className='d-flex justify-content-around mt-4'>
+                    <div className='col d-flex'>
+                        <img className='cart-image' src={item.imgUrl} />
+                        <p className='px-3'>{item.name}</p>
+                    </div>
+                    <div className='col'>
+                        ${item.price}
+                    </div>
+                    <div className='col'>
+                        <div className="btn-group" role="group" aria-label="Second group">
+                            <button onClick={() => removeItem(item.id)} className="btn">-</button>
+                            <button className="btn">{item.quantity}</button>
+                            <button onClick={() => addItems(item.id)} type="button" className="btn ">+</button>
+                        </div>
+                    </div>
+                    <div className='col'>
+                        ${item.totalPrice}
+                    </div>
+                    <div className='col'>
+                        <Button onClick={() => handleDelete(item.id)} variant="danger" size="sm">
+                                Delete
+                        </Button>
+                    </div>
+                </div>
+             ))}
+             </div>
+             
+             <div className='d-block d-sm-none mt-5'>
+             {itemsList.map((item) => (
+                <div key={item.id} className="col">
+                    <div className="col-sm-6">
+                        <div className='d-flex justify-content-between border border-4 p-2'>
+                            <div><h1>Product</h1></div>
+                            <div className='d-flex'>
+                                <img className='cart-image' src={item.imgUrl} />
+                                <p className='px-3'>{item.name}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-6">
+                        <div className='d-flex justify-content-between border-4 border p-2'>
+                            <div><h1>Price</h1></div>
+                            <div>${item.price}</div>
+                        </div>
+                    </div>
+                    <div className="col-sm-6">
+                        <div className='d-flex justify-content-between border-4 border p-2'>
+                            <div><h1>Quantity</h1></div>
+                            <div className="btn-group" role="group" aria-label="Second group">
                                 <button onClick={() => removeItem(item.id)} className="btn">-</button>
                                 <button className="btn">{item.quantity}</button>
                                 <button onClick={() => addItems(item.id)} type="button" className="btn ">+</button>
                             </div>
-                        </td>
-                        <td>${item.totalPrice}</td>
-                        <td>
-                            <Button onClick={() => handleDelete(item.id)} variant="danger" size="sm">
+                        </div>
+                    </div>
+                    <div className="col-sm-3">
+                        <div className='d-flex justify-content-between border-4 border p-2'>
+                            <div><h1>Total</h1></div>
+                            <div>${item.totalPrice}</div>
+                        </div>
+                    </div>
+
+                    <div className="col-sm-6 pt-5">
+                        <div className='d-flex justify-content-end'>
+                        <Button onClick={() => handleDelete(item.id)} variant="danger" size="sm">
                                 Delete
-                            </Button>
-                        </td>
-                        </tr>
-                    </tbody>
-                ))}
-                </table>
+                        </Button>
+                        </div>
+                    </div>
                 </div>
-            
+             ))}
+
             </div>
+        </div>
         </div>
 
         <div className='p-5 me-auto col-md-3 offset-md-7 '>
