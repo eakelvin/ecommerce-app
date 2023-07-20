@@ -7,6 +7,7 @@ import DetailsPage from './Pages/DetailsPage'
 import CartPage from './Pages/CartPage'
 import Login from './Pages/LoginPage'
 import Signup from './Pages/SignupPage'
+import Thanks from './Pages/Thanks'
 import { useSelector } from 'react-redux'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/cart' element={<CartPage />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<Signup />}/>
+        <Route path='/thanks' element={<Thanks />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
     </Router>

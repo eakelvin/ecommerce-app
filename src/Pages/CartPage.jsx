@@ -2,7 +2,8 @@ import React from 'react'
 import Navbar from '../Components/Navbar'
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../CarttSlice';
+import { addToCart, deleteFromCart, removeFromCart } from '../CarttSlice';
+import { Link } from 'react-router-dom';
 
 
 function CartPage() {
@@ -19,9 +20,14 @@ function CartPage() {
         dispatch(addToCart(item))
     }
 
-    const minusItems = (id) => {
+    const removeItem = (id) => {
         dispatch(removeFromCart(id))
     }
+
+    const handleDelete = (id) => {
+        dispatch(deleteFromCart(id))
+    }
+
 
   return (
     <>
@@ -54,14 +60,14 @@ function CartPage() {
                         <td>${item.price}</td>
                         <td>
                             <div className="btn-group me-2" role="group" aria-label="Second group">
-                                <button onClick={() => minusItems(item.id)} className="btn">-</button>
+                                <button onClick={() => removeItem(item.id)} className="btn">-</button>
                                 <button className="btn">{item.quantity}</button>
                                 <button onClick={() => addItems(item.id)} type="button" className="btn ">+</button>
                             </div>
                         </td>
                         <td>${item.totalPrice}</td>
                         <td>
-                            <Button variant="danger" size="sm">
+                            <Button onClick={() => handleDelete(item.id)} variant="danger" size="sm">
                                 Delete
                             </Button>
                         </td>
@@ -80,7 +86,7 @@ function CartPage() {
             </div>
             
             <div className='d-flex justify-content-end'>
-                <Button style={{backgroundColor: "#001066"}} size="sm">
+                <Button as={Link} to='/thanks' style={{backgroundColor: "#001066"}} size="sm">
                     Checkout
                 </Button>
             </div>

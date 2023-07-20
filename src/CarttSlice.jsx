@@ -40,10 +40,17 @@ const cartSlice = createSlice({
                 existingItem.totalPrice -= existingItem.price
             }
         },
-
+        deleteFromCart(state, action) {
+            const id = action.payload
+            state.cartItems = state.cartItems.filter(item => item.id !== id)
+            const deletedItem = state.cartItems.find(item => item.id === id)
+            if (deletedItem) {
+                state.cartTotalQuantity -= deletedItem.quantity
+            }
+        }
 
     }
 })
 
-export const { addToCart, removeFromCart } = cartSlice.actions
+export const { addToCart, removeFromCart, deleteFromCart } = cartSlice.actions
 export default cartSlice.reducer
