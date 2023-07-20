@@ -68,7 +68,7 @@ function Login() {
           }}
         >
         <FormikForm>
-          <Col sm={3} className='mx-auto'>
+          <div className='col-7 col-lg-4 mx-auto'>
             <Form.Group className="mb-3">
               <Form.Label>Email Address</Form.Label>
               <Field required className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
@@ -77,9 +77,9 @@ function Login() {
                             />
                   <ErrorMessage component='label' className='form-label text-danger fw-bold' name='email' />
             </Form.Group>
-          </Col>
+          </div>
 
-          <Col sm={3} className='mx-auto'>
+          <div className='col-7 col-lg-4 mx-auto'>
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
             <Field className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
@@ -88,15 +88,15 @@ function Login() {
                           />
                   <ErrorMessage component='label' className='form-label text-danger' name='password' />
           </Form.Group>
-          </Col>
+          </div>
 
-          <Col sm={3} className='mx-auto mt-4'>
+          <div className='col-7 col-lg-4 mx-auto mt-4'>
           <div className='d-grid gap-2'>
           <Button style={{backgroundColor: "#001066"}} type="submit">
             Sign In
           </Button>
           </div>
-          </Col>
+          </div>
 
         </FormikForm>
         </Formik>

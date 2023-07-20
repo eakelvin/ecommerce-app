@@ -35,7 +35,7 @@ function Signup() {
                 </div>
         </nav>
 
-        <div className='mt-5 pt-5'>
+        <div className='mt-5 p-5'>
             <div className='d-flex justify-content-center'>
                 <h5 className='fw-bold'>Create an Account</h5>
             </div>
@@ -68,7 +68,7 @@ function Signup() {
                 }}
             >    
             <FormikForm>
-                <Col sm={3} className='mx-auto'>
+                <div className='col-7 col-lg-4 mx-auto'>
                     <Form.Group className="mb-3">
                     <Form.Label>Email Address</Form.Label>
                     <Field className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
@@ -78,9 +78,9 @@ function Signup() {
                             />
                         <ErrorMessage component='label' className='form-label text-danger' name='email' />
                     </Form.Group>
-                </Col>
+                </div>
 
-                <Col sm={3} className='mx-auto'>
+                <div className='col-7 col-lg-4 mx-auto'>
                 <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
                     <Field required className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
@@ -89,9 +89,9 @@ function Signup() {
                                 />
                     <ErrorMessage component="label" className='form-label text-danger' name='password' />
                 </Form.Group>
-                </Col>
+                </div>
 
-                <Col sm={3} className='mx-auto'>
+                <div className='col-7 col-lg-4 mx-auto'>
                 <Form.Group className="mb-3">
                     <Form.Label>Confirm Password</Form.Label>
                     <Field required className='form-control p-2' style={{backgroundColor: "#F5F5F5"}} 
@@ -101,15 +101,15 @@ function Signup() {
                                 />
                     <ErrorMessage name='confirmPassword' component='label' className='form-label text-danger font-bold' />
                 </Form.Group>
-                </Col>
-
-                <Col sm={3} className='mx-auto mt-4'>
-                <div className='d-grid gap-2'>
-                <Button style={{backgroundColor: "#001066"}} type="submit">
-                    Sign Up
-                </Button>
                 </div>
-                </Col>
+
+                <div className='col-7 col-lg-4 mx-auto mt-4'>
+                    <div className='d-grid gap-2'>
+                    <Button style={{backgroundColor: "#001066"}} type="submit">
+                        Sign Up
+                    </Button>
+                    </div>
+                </div>
             </FormikForm>
             </Formik>
             </div>
