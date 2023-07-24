@@ -12,15 +12,21 @@ function DetailsPage() {
     const {id} = useParams()
     const products = data.find(prod => prod.id === id)
     const dispatch = useDispatch()
-   
+    const cartItems = useSelector((state) => state.cart.cartItems)
 
     const handleCart = () => {
-      dispatch(addToCart({
+      const newItem = {
         name: products.name,
         id: products.id,
         price: products.price,
         imgUrl: products.imgUrl
-      }))
+      }
+      const existingItem = cartItems.find((item) => item.id === newItem.id)
+      if(existingItem) {
+        alert("Item already exist in Cart")
+      } else {
+        dispatch(addToCart(newItem))
+      }
     }
 
   return (
