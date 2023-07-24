@@ -31,10 +31,10 @@ import { useSelector } from "react-redux";
   }
 
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid justify-content-between">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <div className="container-fluid justify-content-between">
 
-            <div class="d-flex">
+            <div className="d-flex">
               <Link style={{textDecoration: 'none'}} to="/">
                 <span className="">
                   <img src="/Paperbag.png" alt="Logo" className="d-inline-block" />
@@ -43,8 +43,8 @@ import { useSelector } from "react-redux";
               </Link>
             </div>
           
-            <ul class="navbar-nav flex-row">
-              <li class="nav-item me-3 me-lg-1 active">
+            <ul className="navbar-nav flex-row">
+              <li className="nav-item me-3 me-lg-1 active">
               <span className="position-relative">
                 <Link style={{textDecoration: 'none'}} to="/cart">
                     Cart
@@ -57,8 +57,8 @@ import { useSelector } from "react-redux";
               </li>
             </ul>
 
-            <ul class="navbar-nav flex-row">
-              <li class="nav-item me-3 me-lg-1">
+            <ul className="navbar-nav flex-row">
+              <li className="nav-item me-3 me-lg-1">
               {isLoggedIn ? (
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                   <Button onClick={handleLogout} className="btn btn-secondary" size="lg">

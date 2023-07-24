@@ -3,10 +3,11 @@ import Navbar from '../Components/Navbar'
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, deleteFromCart, removeFromCart } from '../CarttSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 function CartPage() {
+    const navigate = useNavigate()
     const itemsList = useSelector((state) => state.cart.cartItems)
     const dispatch = useDispatch()
     let total = 0
@@ -26,6 +27,11 @@ function CartPage() {
 
     const handleDelete = (id) => {
         dispatch(deleteFromCart(id))
+    }
+
+    const handleCheckout = () => {
+        alert("Kindly Place an Order. No items in the cart.")
+        navigate('/')
     }
 
 
@@ -127,9 +133,15 @@ function CartPage() {
             </div>
             
             <div className='d-flex justify-content-end'>
+            {itemsList.length > 0 ? (
                 <Button as={Link} to='/thanks' style={{backgroundColor: "#001066"}} size="sm">
                     Checkout
                 </Button>
+            ) : (
+                <Button onClick={handleCheckout} style={{backgroundColor: "#001066"}} size="sm">
+                    Place Order
+                </Button>
+            )}
             </div>
         </div>
       
