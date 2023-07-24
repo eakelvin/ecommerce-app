@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom'
 import Home from './Pages/Home'
 import ErrorPage from './Pages/ErrorPage'
 import DetailsPage from './Pages/DetailsPage'
@@ -9,14 +9,15 @@ import Login from './Pages/LoginPage'
 import Signup from './Pages/SignupPage'
 import Thanks from './Pages/Thanks'
 import { useSelector } from 'react-redux'
+import Navbar from './Components/Navbar'
 
 function App() {
   const cartItem = useSelector((state) => state.cart.cartItems)
-  console.log(cartItem);
 
   return (
     <>
     <Router>
+       {<Navbar showCart={true} />}
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route exact path='/productdetails/:id' element={<DetailsPage />} />

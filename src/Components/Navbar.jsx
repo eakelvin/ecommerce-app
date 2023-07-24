@@ -44,7 +44,8 @@ import { useSelector } from "react-redux";
             </div>
           
             <ul className="navbar-nav flex-row">
-              <li className="nav-item me-3 me-lg-1 active">
+              {/* {showCart && ( */}
+                <li className="nav-item me-3 me-lg-1 active">
               <span className="position-relative">
                 <Link style={{textDecoration: 'none'}} to="/cart">
                     Cart
@@ -55,6 +56,7 @@ import { useSelector } from "react-redux";
                 </Link>
                 </span>
               </li>
+              {/* )} */}
             </ul>
 
             <ul className="navbar-nav flex-row">

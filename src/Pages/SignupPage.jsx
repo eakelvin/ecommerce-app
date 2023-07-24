@@ -67,6 +67,7 @@ function Signup() {
                 onSubmit={(values) => {
                     delete values.confirmPassword
                     localStorage.setItem("values", JSON.stringify(values))
+                    alert("Account Created Successfully")
                     navigate('/login')
                     console.log(values);
                 }}

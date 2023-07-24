@@ -37,7 +37,7 @@ function CartPage() {
 
   return (
     <>
-        <Navbar />
+        {/* <Navbar /> */}
 
         <div className='p-4'>            
         <div className='mt-5 p-5' style={{backgroundColor: "#F5F5F5"}}>
