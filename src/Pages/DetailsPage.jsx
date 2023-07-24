@@ -31,7 +31,7 @@ function DetailsPage() {
 
   return (
     <div>
-        {/* <Navbar /> */}
+        <Navbar />
 
         <Container className='p-5'>
             <Row>

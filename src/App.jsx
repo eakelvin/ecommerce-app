@@ -17,10 +17,10 @@ function App() {
   return (
     <>
     <Router>
-       {<Navbar showCart={true} />}
+       {/* {<Navbar showCart={true} />} */}
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route exact path='/productdetails/:id' element={<DetailsPage />} />
+        <Route path='/productdetails/:id' element={<DetailsPage />} />
         <Route path='/cart' element={<CartPage />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<Signup />}/>
