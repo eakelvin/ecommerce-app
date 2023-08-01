@@ -5,9 +5,17 @@ import { Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
 import * as Yup from 'yup'
+import { auth } from '../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
 
 function Signup() {
     const navigate = useNavigate()
+
+    const signUp = async () => {
+        
+
+    }
 
   return (
     <>
@@ -64,11 +72,18 @@ function Signup() {
                             .oneOf([Yup.ref("password"), null], "Passwords must match!")
                     })
                 }
-                onSubmit={(values) => {
-                    delete values.confirmPassword
-                    localStorage.setItem("values", JSON.stringify(values))
-                    alert("Account Created Successfully")
-                    navigate('/login')
+                onSubmit={ async (values) => {
+                    // delete values.confirmPassword
+                    // localStorage.setItem("values", JSON.stringify(values))
+                    // alert("Account Created Successfully")
+                    try {
+                        await createUserWithEmailAndPassword(auth, values.email, values.password).then((userDetails) => {
+                            console.log(userDetails);
+                            navigate('/login')
+                        })
+                    } catch (error) {
+                        console.log(error);
+                    }
                     console.log(values);
                 }}
             >    
@@ -110,7 +125,7 @@ function Signup() {
 
                 <div className='col-7 col-lg-4 mx-auto mt-4'>
                     <div className='d-grid gap-2'>
-                    <Button style={{backgroundColor: "#001066"}} type="submit">
+                    <Button onClick={signUp} style={{backgroundColor: "#001066"}} type="submit">
                         Sign Up
                     </Button>
                     </div>
