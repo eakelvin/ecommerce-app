@@ -4,7 +4,7 @@ import {BsCartCheck, BsFillCartXFill} from "react-icons/bs"
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 
  function Navbar() {
@@ -37,13 +37,17 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
   //   navigate('/login')
   // }
 
-  // const handleLogout = () => {
-  //   setIsLoggedIn(false)
-  //   localStorage.setItem('isLoggedIn', 'false')
-  //   // localStorage.clear()
-  //   window.location.reload()
-  //   navigate('/')
-  // }
+  const handleLogout = async() => {
+    const auth = getAuth()
+    try {
+      await signOut(auth)
+      alert('LOGGED OUT SUCCESSFULLY');
+    } catch (error) {
+      console.log(error);
+    }
+    window.location.reload()
+    navigate('/')
+  }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -74,20 +78,10 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
             <ul className="navbar-nav flex-row">
               <li className="nav-item me-3 me-lg-1">
-              {/* {isLoggedIn &&  
-                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <Link to="/">
-                    <Button className="btn" style={{backgroundColor: "#001066"}} size="lg" active>
-                      Logout
-                    </Button>
-                  </Link>
-                  </div>
-                } */}
-
               {isLoggedIn ? (
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                    {isSignedIn}
-                  <Button href="/login" className="btn btn-secondary" size="lg">
+                  <Button onClick={handleLogout} className="btn btn-secondary" size="lg">
                     Logout
                   </Button>
                 </div>
