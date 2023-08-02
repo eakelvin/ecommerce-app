@@ -4,31 +4,46 @@ import {BsCartCheck, BsFillCartXFill} from "react-icons/bs"
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
  function Navbar() {
   const navigate = useNavigate()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isSignedIn, setIsSignedIn] = useState('')
   const quantity = useSelector((state) => state.cart.cartTotalQuantity)
 
   useEffect(() => {
-    const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true'
-    setIsLoggedIn(userLoggedIn)
+    // const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true'
+    // setIsLoggedIn(userLoggedIn)
+
+    const auth = getAuth()
+    const unsubscribe = () => onAuthStateChanged(auth, user => {
+      if (user) {
+        setIsSignedIn(user.email)
+        setIsLoggedIn(true)
+      } else {
+        setIsSignedIn('')
+        setIsLoggedIn(false)
+      }
+    })
+    return () =>  unsubscribe()
+
   }, [])
 
-  const handleLogin = () => {
-    setIsLoggedIn(true)
-    localStorage.setItem('isLoggedIn', 'true')
-    navigate('/login')
-  }
+  // const handleLogin = () => {
+  //   setIsLoggedIn(true)
+  //   localStorage.setItem('isLoggedIn', 'true')
+  //   navigate('/login')
+  // }
 
-  const handleLogout = () => {
-    setIsLoggedIn(false)
-    localStorage.setItem('isLoggedIn', 'false')
-    // localStorage.clear()
-    window.location.reload()
-    navigate('/')
-  }
+  // const handleLogout = () => {
+  //   setIsLoggedIn(false)
+  //   localStorage.setItem('isLoggedIn', 'false')
+  //   // localStorage.clear()
+  //   window.location.reload()
+  //   navigate('/')
+  // }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -44,7 +59,6 @@ import { useSelector } from "react-redux";
             </div>
           
             <ul className="navbar-nav flex-row">
-              {/* {showCart && ( */}
                 <li className="nav-item me-3 me-lg-1 active">
               <span className="position-relative">
                 <Link style={{textDecoration: 'none'}} to="/cart">
@@ -56,26 +70,34 @@ import { useSelector } from "react-redux";
                 </Link>
                 </span>
               </li>
-              {/* )} */}
+             {isSignedIn}
             </ul>
 
             <ul className="navbar-nav flex-row">
               <li className="nav-item me-3 me-lg-1">
+              {/* {isLoggedIn &&  
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <Link to="/">
+                    <Button className="btn" style={{backgroundColor: "#001066"}} size="lg" active>
+                      Logout
+                    </Button>
+                  </Link>
+                  </div>
+                } */}
+
               {isLoggedIn ? (
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <Button onClick={handleLogout} className="btn btn-secondary" size="lg">
+                  <Button href="/login" className="btn btn-secondary" size="lg">
                     Logout
                   </Button>
                 </div>
-
                 ):(
-
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  {/* <Link to="/login"> */}
-                    <Button onClick={handleLogin} className="btn" style={{backgroundColor: "#001066"}} size="lg" active>
+                  <Link to="/login">
+                    <Button className="btn" style={{backgroundColor: "#001066"}} size="lg" active>
                       Login
                     </Button>
-                  {/* </Link> */}
+                  </Link>
                 </div>
               )}
               </li>

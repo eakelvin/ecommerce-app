@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import { Col } from 'react-bootstrap';
@@ -12,10 +12,6 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 function Signup() {
     const navigate = useNavigate()
 
-    const signUp = async () => {
-        
-
-    }
 
   return (
     <>
@@ -72,19 +68,21 @@ function Signup() {
                             .oneOf([Yup.ref("password"), null], "Passwords must match!")
                     })
                 }
-                onSubmit={ async (values) => {
+                onSubmit={ async (values, {setFieldError}) => {
                     // delete values.confirmPassword
                     // localStorage.setItem("values", JSON.stringify(values))
-                    // alert("Account Created Successfully")
+                    
                     try {
-                        await createUserWithEmailAndPassword(auth, values.email, values.password).then((userDetails) => {
-                            console.log(userDetails);
+                         await createUserWithEmailAndPassword(auth, values.email, values.password)
+                            alert("Account Created Successfully")
                             navigate('/login')
-                        })
                     } catch (error) {
+                        if (error.code == 'auth/email-already-in-use') {
+                            setFieldError('email', 'Email already in use')
+                        }
                         console.log(error);
                     }
-                    console.log(values);
+                    console.log(error);
                 }}
             >    
             <FormikForm>
@@ -125,7 +123,7 @@ function Signup() {
 
                 <div className='col-7 col-lg-4 mx-auto mt-4'>
                     <div className='d-grid gap-2'>
-                    <Button onClick={signUp} style={{backgroundColor: "#001066"}} type="submit">
+                    <Button style={{backgroundColor: "#001066"}} type="submit">
                         Sign Up
                     </Button>
                     </div>

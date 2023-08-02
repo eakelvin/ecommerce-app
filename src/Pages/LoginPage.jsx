@@ -5,6 +5,8 @@ import { Col } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import * as Yup from 'yup'
 import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 
 
 function Login() {
@@ -59,16 +61,26 @@ function Login() {
                 .min(8, 'Password must be at least 8 characters')
             })
           }
-          onSubmit = {(values, {setErrors}) => {
-            const storedInfo = JSON.parse(localStorage.getItem("values"))
-            if(values.email === storedInfo.email && values.password === storedInfo.password) {
-              // localStorage.setItem('values', true)
-              navigate('/')
-            } else {
-              setErrors({ password: 'Invalid Email or Password. Please try again'})
-            }
+          onSubmit = { async (values, {setFieldError}) => {
+            // const storedInfo = JSON.parse(localStorage.getItem("values"))
+            // if(values.email === storedInfo.email && values.password === storedInfo.password) {
+            //   // localStorage.setItem('values', true)
+            //   navigate('/')
+            // } else {
+            //   setErrors({ password: 'Invalid Email or Password. Please try again'})
+            // }
             
             // console.log(values);
+            try {
+              await signInWithEmailAndPassword(auth, values.email, values.password)
+              navigate('/')
+            } catch (error) {
+              if (error.code == 'auth/wrong-password') {
+                setFieldError('password', 'Invalid Email or Password')
+              }
+              console.log(error);
+            }
+
           }}
         >
         <FormikForm>
