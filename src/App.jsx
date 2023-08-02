@@ -8,7 +8,6 @@ import CartPage from './Pages/CartPage'
 import Login from './Pages/LoginPage'
 import Signup from './Pages/SignupPage'
 import Thanks from './Pages/Thanks'
-import Welcome from './Pages/Welcome'
 import { useSelector } from 'react-redux'
 import Navbar from './Components/Navbar'
 
@@ -20,7 +19,6 @@ function App() {
     <Router>
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route path='/welcome' element={<Welcome />} />
         <Route path='/productdetails/:id' element={<DetailsPage />} />
         <Route path='/cart' element={<CartPage />}/>
         <Route path='/login' element={<Login />}/>

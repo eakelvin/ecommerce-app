@@ -70,7 +70,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
                 </Link>
                 </span>
               </li>
-             {isSignedIn}
             </ul>
 
             <ul className="navbar-nav flex-row">
@@ -87,6 +86,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
               {isLoggedIn ? (
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                   {isSignedIn}
                   <Button href="/login" className="btn btn-secondary" size="lg">
                     Logout
                   </Button>
