@@ -9,7 +9,7 @@ import Login from './Pages/LoginPage'
 import Signup from './Pages/SignupPage'
 import Thanks from './Pages/Thanks'
 import { useSelector } from 'react-redux'
-import Navbar from './Components/Navbar'
+import Paystack from './Components/Paystack'
 
 function App() {
   const cartItem = useSelector((state) => state.cart.cartItems)
@@ -23,7 +23,7 @@ function App() {
         <Route path='/cart' element={<CartPage />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<Signup />}/>
-        <Route path='/thanks' element={<Thanks />} />
+        <Route path='/thanks' element={<Paystack />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
     </Router>
