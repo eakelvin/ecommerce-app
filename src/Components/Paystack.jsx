@@ -3,7 +3,7 @@ import { PaystackButton } from 'react-paystack'
 import { useSelector } from 'react-redux'
 
 const Paystack = () => {
-    const publicKey = "process.env.API_KEY"
+    const publicKey = process.env.API_KEY
         // const amount = 1000000 // Remember, set in kobo!
         const [email, setEmail] = useState("")
         const [name, setName] = useState("")

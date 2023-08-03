@@ -50,6 +50,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
   }
 
     return (
+      <>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid justify-content-between">
 
@@ -99,6 +100,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
             
           </div>
         </nav>
+        </>
     )
 }
 
