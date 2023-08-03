@@ -78,6 +78,9 @@ function Login() {
               if (error.code == 'auth/wrong-password') {
                 setFieldError('password', 'Invalid Email or Password')
               }
+              if(error.code == 'auth/user-not-found') {
+                setFieldError('password', 'User does not exist, please create an account')
+              }
               console.log(error);
             }
 

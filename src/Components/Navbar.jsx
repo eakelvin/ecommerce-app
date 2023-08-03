@@ -81,7 +81,6 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
               <li className="nav-item me-3 me-lg-1">
               {isLoggedIn ? (
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                   {isSignedIn}
                   <Button onClick={handleLogout} className="btn btn-secondary" size="lg">
                     Logout
                   </Button>
@@ -100,6 +99,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
             
           </div>
         </nav>
+        <p className="text-center">Welcome {isSignedIn}</p>
         </>
     )
 }
